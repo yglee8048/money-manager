@@ -5,21 +5,21 @@ import java.time.Period
 import java.time.temporal.ChronoUnit
 
 abstract class Assets {
-    abstract val name: String
-    abstract val principalValue: Long
-    abstract val foreignExchangeExposure: Boolean
-    abstract val volatility: Float
+    abstract var name: String
+    abstract var principalValue: Long
+    abstract var foreignExchangeExposure: Boolean
+    abstract var volatility: Float
 
     abstract fun getProfits(): Long
     abstract fun getPresentValue(): Long
 }
 
 class VariableAssets(
-    override val name: String,
-    override val principalValue: Long,
-    override val foreignExchangeExposure: Boolean,
-    override val volatility: Float,
-    private val presentValue: Long,
+    override var name: String,
+    override var principalValue: Long,
+    override var foreignExchangeExposure: Boolean,
+    override var volatility: Float,
+    private var presentValue: Long,
 ) : Assets() {
 
     override fun getProfits(): Long {
@@ -32,10 +32,10 @@ class VariableAssets(
 }
 
 data class FixedAssets(
-    override val name: String,
-    override val principalValue: Long,
-    override val foreignExchangeExposure: Boolean,
-    override val volatility: Float,
+    override var name: String,
+    override var principalValue: Long,
+    override var foreignExchangeExposure: Boolean,
+    override var volatility: Float,
     val interestRate: Float,
     val startDate: LocalDate,
     val endDate: LocalDate?,
